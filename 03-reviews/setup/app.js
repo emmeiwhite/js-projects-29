@@ -40,6 +40,7 @@ const btnNext = document.querySelector(".next-btn");
 
 /** Just as a starting point, let's assume we have only one card and we have to inset data via JS */
 
+/*
 const person = {
   id: 1,
   name: "susan smith",
@@ -52,3 +53,63 @@ img.setAttribute("src", person.img);
 author.textContent = person.name;
 job.textContent = person.job;
 info.textContent = person.text;
+*/
+
+/* --- NOW LET'S WORK WITH WHOLE ARRAY | 
+      It is something like ReactJS in this case. 
+
+      We assume we have one Component (Structure in HTML), and based on the user click, we update the content
+--- */
+
+let currentPerson = 0;
+let totalPersons = reviews.length - 1;
+
+function renderPerson() {
+  img.setAttribute("src", reviews[currentPerson]["img"]);
+  author.textContent = reviews[currentPerson]["name"];
+  job.textContent = reviews[currentPerson]["job"];
+  info.textContent = reviews[currentPerson]["text"];
+}
+
+function showPrevPerson() {
+  currentPerson--;
+  if (currentPerson < 0) {
+    currentPerson = totalPersons;
+  }
+
+  renderPerson();
+}
+
+function showNextPerson() {
+  currentPerson++;
+  if (currentPerson > totalPersons) {
+    currentPerson = 0;
+  }
+  renderPerson();
+}
+
+btnPrev.addEventListener("click", showPrevPerson);
+btnNext.addEventListener("click", showNextPerson);
+
+/*** No Loop thing, Just the simple Logic and wollah
+ * !!!!
+ */
+
+/** Surprise btn: This will show a person randomly, so nothing major */
+
+const randomBtn = document.querySelector(".random-btn");
+
+function showRandom() {
+  const randomId = Math.floor(Math.random() * reviews.length);
+  console.log(randomId);
+
+  currentPerson = randomId;
+  console.log(reviews);
+  console.log(reviews[0]);
+  // console.log(reviews[currentPerson]);
+  renderPerson();
+}
+
+randomBtn.addEventListener("click", function () {
+  showRandom();
+});
