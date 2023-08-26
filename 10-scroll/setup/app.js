@@ -15,3 +15,26 @@
 const date = document.querySelector(".date");
 
 date.textContent = new Date().getFullYear();
+
+/* --- Toggle the main-menu ---*/
+
+const toggleBtn = document.querySelector(".nav-toggle");
+const linksContainer = document.querySelector(".links-container");
+const links = document.querySelector(".links");
+
+toggleBtn.addEventListener("click", function (e) {
+  //   linksContainer.classList.toggle("show-links");
+  // let's do it dynamically
+  console.log("-------------------------");
+  const linksHeight = links.getBoundingClientRect().height;
+  const linksContainerHeight = linksContainer.getBoundingClientRect().height;
+
+  console.log("linksContainer height is:" + linksContainerHeight);
+  console.log("links height is:" + linksHeight);
+
+  if (linksContainerHeight === 0) {
+    linksContainer.style.height = `${linksHeight}px`;
+  } else {
+    linksContainer.style.height = 0;
+  }
+});
